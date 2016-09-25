@@ -12,29 +12,35 @@ return function (connection, payload)
     if methodIsAllowed[req.method] then
         local uri = req.uri
 
-        file.chdir("/SD0")
-        local fileExists = file.exists(uri.file)
-        if not fileExists then
-            fileExists = file.exists(uri.file .. ".gz")
+        if uri.isScript then
+            local fileExists = file.exists("/SD0/lua/"..uri.file)
+            collectgarbage()
             if fileExists then
-                uri.file = uri.file .. ".gz"
-                uri.isGzipped = true
+                serveFunction = dofile("/SD0/lua/"..uri.file)
+            else
+                uri.args = {code = 404, errorString = "Not Found"}
+                serveFunction = dofile("httpserver-error.lc")
             end
-        end
-        file.chdir("/FLASH")
-        collectgarbage()
-        print("File '"..uri.file.."' exists :"..tostring(fileExists));
-
-        if not fileExists then
-            uri.args = {code = 404, errorString = "Not Found"}
-            serveFunction = dofile("httpserver-error.lc")
-        elseif uri.isScript then
-            file.chdir("/SD0")
-            serveFunction = dofile(uri.file)
-            file.chdir("/FLASH")
         else
-            uri.args = {file = uri.file, ext = uri.ext, gzipped = uri.isGzipped}
-            serveFunction = dofile("httpserver-static.lc")
+            local fileExists = file.exists("/SD0/html/"..uri.file)
+            if not fileExists then
+                fileExists = file.exists("/SD0/html/"..uri.file .. ".gz")
+                if fileExists then
+                    uri.file = uri.file .. ".gz"
+                    uri.isGzipped = true
+                end
+            end
+            collectgarbage()
+            print("File '"..uri.file.."' exists :"..tostring(fileExists));
+
+            if not fileExists then
+                uri.args = {code = 404, errorString = "Not Found"}
+                serveFunction = dofile("httpserver-error.lc")
+            else
+                uri.args = {file = uri.file, ext = uri.ext, gzipped = uri.isGzipped}
+                serveFunction = dofile("httpserver-static.lc")
+            end
+
         end
     else
         serveFunction = dofile("httpserver-error.lc")

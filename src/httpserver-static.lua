@@ -11,12 +11,10 @@ return function (connection, req, args)
       -- NodeMCU file API lets you open 1 file at a time.
       -- So we need to open, seek, close each time in order
       -- to support multiple simultaneous clients.
-      file.chdir("/SD0")
-      file.open(args.file)
+      file.open("/SD0/html/"..args.file)
       file.seek("set", bytesSent)
       local chunk = file.read(1024)
       file.close()
-      file.chdir("/FLASH")
       if chunk == nil then
          continue = false
       else

@@ -22,7 +22,7 @@ return function(filename)
                 compileAndRemoveIfNeeded(f) 
             end
         end
-        file.chdir("/SD0")
+        file.chdir("/SD0/lua")
         allFiles = file.list()
         for f,s in pairs(allFiles) do
             if f~="init.lua" and #f >= 4 and string.sub(f, -4, -1) == ".lua" then
