@@ -1,6 +1,5 @@
 -- Compile code and remove original .lua files.
 -- This only happens the first time afer the .lua files are uploaded.
--- Skip init.lua!
 
 return function(filename)
     local function compileAndRemoveIfNeeded(f)
@@ -23,6 +22,14 @@ return function(filename)
                 compileAndRemoveIfNeeded(f) 
             end
         end
+        file.chdir("/SD0")
+        allFiles = file.list()
+        for f,s in pairs(allFiles) do
+            if f~="init.lua" and #f >= 4 and string.sub(f, -4, -1) == ".lua" then
+                compileAndRemoveIfNeeded(f)
+            end
+        end
+        file.chdir("/FLASH")
         allFiles = nil
     end
 

@@ -1,11 +1,12 @@
--- Author: Daniel Salazar
 -- Reads and returns a something.lc conf file.
 -- If default conf file doesn't exist (something-default.lc), it gets created by *makedefault.lc
 -- If conf file doesn't exist (something.lc), it gets created from the default.
--- Requirements: the conf file must have 2 scripts implemented, which must 
--- follow a naming convention
--- somethingmakedefault.lc: script that generates and returns a default conf object
--- somethingwrite.lc: script that takes a conf obj and writes it to a *.lua file (uncompiled)
+--
+-- Requirements: the conf file must have 2 scripts implemented, which must
+-- follow a naming convention:
+--      somethingmakedefault.lc: script that generates and returns a default conf object
+--      somethingwrite.lc: script that takes a conf obj and writes it to a *.lua file (uncompiled)
+--
 -- In addition, a compile.lc script must exist, which compiles the .lua conf to .lc.
 -- Example:
 -- wifiConf = dofile("wifi-conf.lc")

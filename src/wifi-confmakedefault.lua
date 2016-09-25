@@ -3,16 +3,16 @@ local wifiConfig = {}
 -- wifi.STATION    -- station: join a WiFi network
 -- wifi.SOFTAP     -- access point: create a WiFi network
 -- wifi.STATIONAP  -- both station and access point
-wifiConfig.mode = wifi.STATIONAP
+wifiConfig.mode = wifi.SOFTAP
 wifiConfig.phymode = wifi.PHYMODE_N
 
 wifiConfig.accessPointConfig = {}
-wifiConfig.accessPointConfig.ssid = "ESP-"..node.chipid()   -- Name of the SSID you want to create
+wifiConfig.accessPointConfig.ssid = "Brainbox-"..node.chipid()   -- Name of the SSID you want to create
 wifiConfig.accessPointConfig.pwd = "theballismine"    -- WiFi password - at least 8 characters
 wifiConfig.accessPointConfig.auth = wifi.WPA2_PSK --OPEN/WPA_PSK/WPA2_PSK/WPA_WPA2_PSK
 wifiConfig.accessPointConfig.channel = 6 -- 1-14
 wifiConfig.accessPointConfig.hidden = 0
-wifiConfig.accessPointConfig.max = 4 -- max clients: 1-4
+wifiConfig.accessPointConfig.max = 2 -- max clients: 1-4
 wifiConfig.accessPointConfig.beacon = 100 -- beacon interval 100-60000
 
 wifiConfig.accessPointIpConfig = {}

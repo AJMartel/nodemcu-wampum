@@ -3,25 +3,20 @@ return function (connection, req, args)
    dofile("httpserver-header.lc")(connection, 200, "html")
    connection:send('<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Server File Listing</title></head>')
    connection:send('<body>')
-   connection:send('<h1>Server File Listing</h1>')
+   connection:send('<h1>Serverrrrr File Listing</h1>')
 
-   local remaining, used, total=file.fsinfo()
+   local total=file.fsinfo()
    connection:send("<b>Total size: </b> " .. total .. " bytes<br/>\n")
-   connection:send("<b>In Use: </b> " .. used .. " bytes<br/>\n")
-   connection:send("<b>Free: </b> " .. remaining .. " bytes<br/>\n")
 
    connection:send("<p>\n")
    connection:send("<b>Files:</b><br/>\n")
    connection:send("<ul>\n")
 
+   file.chdir("/SD0")
    for name, size in pairs(file.list()) do
-
-      local isHttpFile = string.match(name, "(http/)") ~= nil
-      if isHttpFile then
-         local url = string.match(name, ".*/(.*)")
-         connection:send('   <li><a href="' .. url .. '">' .. url .. "</a> (" .. size .. " bytes)</li>\n")
-      end
+     connection:send('   <li><a href="' .. name .. '">' .. name .. "</a> (" .. size .. " bytes)</li>\n")
    end
+   file.chdir("/FLASH")
    connection:send("</ul>\n")
    connection:send("</p>\n")
    connection:send('</body></html>')

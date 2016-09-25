@@ -1,28 +1,18 @@
 -- httpserver-servefunction
--- Author: Daniel Salazar
--- Based on work by Marcos Kirsch
 
 
 return function (connection, payload)
-    local conf = dofile("confload.lc")("httpserver-conf.lc")
-    local auth
-    local user = "Anonymous"
-
-    -- parse payload and decide what to serve.
-    if conf.auth.enabled then
-        auth = dofile("httpserver-basicauth.lc")
-        user = auth.authenticate(payload, conf) -- authenticate returns nil on failed auth
-    end
-
     local req = dofile("httpserver-request.lc")(payload)
+    collectgarbage()
     print(req.method .. ": " .. req.request)
 
     local serveFunction = nil
     local methodIsAllowed = {GET=true, POST=true, PUT=true}
 
-    if user and req.methodIsValid and methodIsAllowed[req.method] and #(req.uri.file) <= 31 then
+    if methodIsAllowed[req.method] then
         local uri = req.uri
 
+        file.chdir("/SD0")
         local fileExists = file.exists(uri.file)
         if not fileExists then
             fileExists = file.exists(uri.file .. ".gz")
@@ -31,31 +21,30 @@ return function (connection, payload)
                 uri.isGzipped = true
             end
         end
+        file.chdir("/FLASH")
+        collectgarbage()
+        print("File '"..uri.file.."' exists :"..tostring(fileExists));
 
         if not fileExists then
             uri.args = {code = 404, errorString = "Not Found"}
             serveFunction = dofile("httpserver-error.lc")
         elseif uri.isScript then
+            file.chdir("/SD0")
             serveFunction = dofile(uri.file)
+            file.chdir("/FLASH")
         else
-            local allowStatic = {GET=true, HEAD=true, POST=false, PUT=false, DELETE=false, TRACE=false, OPTIONS=false, CONNECT=false, PATCH=false}
-            if allowStatic[req.method] then
-                uri.args = {file = uri.file, ext = uri.ext, gzipped = uri.isGzipped}
-                serveFunction = dofile("httpserver-static.lc")
-            else
-                uri.args = {code = 405, errorString = "Method not supported"}
-                serveFunction = dofile("httpserver-error.lc")
-            end
+            uri.args = {file = uri.file, ext = uri.ext, gzipped = uri.isGzipped}
+            serveFunction = dofile("httpserver-static.lc")
         end
     else
         serveFunction = dofile("httpserver-error.lc")
-        if not user then
-            req.uri.args = {code = 401, errorString = "Not Authorized", headers = {auth.authErrorHeader(conf)}}
-        elseif req.methodIsValid then
+        if req.methodIsValid then
             req.uri.args = {code = 501, errorString = "Not Implemented"}
         else
             req.uri.args = {code = 400, errorString = "Bad Request"}
         end
     end
+    collectgarbage()
+
     return serveFunction, req
 end

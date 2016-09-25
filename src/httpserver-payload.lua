@@ -7,6 +7,7 @@ return function(payload, fullPayload, bBodyMissing)
         else
             fullPayload = payload 
         end
+
         if (tonumber(string.match(fullPayload, "%d+", fullPayload:find("Content%-Length:")+16)) > #fullPayload:sub(fullPayload:find("\r\n\r\n", 1, true)+4, #fullPayload)) then
             bBodyMissing = true
         else

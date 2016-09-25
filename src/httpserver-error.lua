@@ -1,11 +1,10 @@
 -- httpserver-error.lua
--- Part of nodemcu-httpserver, handles sending error pages to client.
--- Author: Marcos Kirsch
+-- Handles sending error pages to client.
 
 return function (connection, req, args)
 
    local function sendHeader(connection, code, errorString, extraHeaders, mimeType)
-      connection:send("HTTP/1.0 " .. code .. " " .. errorString .. "\r\nServer: nodemcu-httpserver\r\nContent-Type: " .. mimeType .. "\r\n")
+      connection:send("HTTP/1.0 " .. code .. " " .. errorString .. "\r\nServer: brainbox-httpserver\r\nContent-Type: " .. mimeType .. "\r\n")
       for i, header in ipairs(extraHeaders) do
          connection:send(header .. "\r\n")
       end 

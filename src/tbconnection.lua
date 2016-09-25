@@ -1,44 +1,5 @@
 -- httpserver-tbconnection
 -- Threaded buffered connection, meant for use with nodemcu net sockets
--- Author: Daniel Salazar
--- Based on work by Philip Gladstone, Marcos Kirsch
-
---[[--
---receives a buffered connection with similar interface to net sockets
-function onReceive(bconn, payload)
-    bconn:send("blah")
-    bconn:send("bleh")
-    bconn:send("some arbitrarily long string that could even be several kbs in size, as long as heap doesn't run out")
-end
-
-
-srv = net.createServer(port, to)
-srv:listen(80, 
-    function(conn)
-        conn:on("receive", 
-            function(conn, payload)
-                tbconn = dofile("threadbuffconnection.lc")(conn)
-                tbconn:run(onReceive, payload) --runs function in coroutine, passes args to it
-            end
-        )
-    end
-)
-
-
-tbconn:run(func, ...)
-tbconn:close()
-
-bconn:send(payload)
-bconn:flush()
-bconn:close()
-
-bconn:onSent()
-bconn:onReceive()
-bconn:onClose()
-bconn:onSent()
-...
-
---]]--
 
 
 
@@ -70,7 +31,7 @@ return function(connectionArg, keepconnectionArg)
         --private context
         local socket = socketArg
         
-        local flushthreshold = 256 --this is how much payload gets buffered in bytes and sent as one piece to the socket
+        local flushthreshold = 52 --this is how much payload gets buffered in bytes and sent as one piece to the socket
         local size = 0
         local data = {}
         

@@ -1,6 +1,5 @@
 -- httpserver-static.lua
--- Part of nodemcu-httpserver, handles sending static files to client.
--- Author: Marcos Kirsch
+-- Handles sending static files to client.
 
 return function (connection, req, args)
    dofile("httpserver-header.lc")(connection, 200, args.ext, args.gzipped)
@@ -12,10 +11,12 @@ return function (connection, req, args)
       -- NodeMCU file API lets you open 1 file at a time.
       -- So we need to open, seek, close each time in order
       -- to support multiple simultaneous clients.
+      file.chdir("/SD0")
       file.open(args.file)
       file.seek("set", bytesSent)
-      local chunk = file.read(256)
+      local chunk = file.read(1024)
       file.close()
+      file.chdir("/FLASH")
       if chunk == nil then
          continue = false
       else
