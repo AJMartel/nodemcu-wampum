@@ -21,6 +21,19 @@ create your own firmware on the [nodeMCU build server](https://nodemcu-build.com
 At the moment (Sept. 2016) you must select the DEV branch to have FatFS
 Select SPI and FatFS for your build.
 
+This is what my ESP8266 log during startup. Absolute required modules are: SPI and FatFS
+```
+NodeMCU custom build by frightanic.com
+	branch: dev
+	commit: 90839f8956961b1ce225bf5b539beaf402155add
+	SSL: false
+	modules: bit,encoder,file,gpio,http,i2c,net,node,ow,pcm,pwm,rotary,spi,tmr,uart,websocket,wifi
+ build 	built on: 2016-09-22 10:18
+ powered by Lua 5.1.4 on SDK 1.5.4.1(39cb9a32)
+
+```
+
+
 The SD must have at least two folders in the root directory:
  - "html" for all static resources like html/js/css or images
  - "lua" for all dynamic HTML files ( e.g. for ajax endpoints)
