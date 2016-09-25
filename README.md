@@ -14,10 +14,10 @@ Just load your pages on the SD card and your are done.
 Requirements:
 -------------
 You must connect an SD card to your nodeMCU or you are using
-WeMos (nodeMCU protoboard) + SD Card shield (hassle-free version).
+[WeMos](http://www.wemos.cc) (nodeMCU protoboard) + [SD Card shield](http://www.wemos.cc/product/micro-sd-card-shield.html) (hassle-free version).
 
 Use the latest nodemcu-firmware with "FatFS" support. You can
-create your own firmware on https://nodemcu-build.com/
+create your own firmware on the [nodeMCU build server](https://nodemcu-build.com/)
 At the moment (Sept. 2016) you must select the DEV branch to have FatFS
 Select SPI and FatFS for your build.
 
