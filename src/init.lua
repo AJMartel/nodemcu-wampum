@@ -44,7 +44,7 @@ end
 
 -- -----------------------------------------------------------
 -- Compile all .lua files to .lc files for performance and
--- memory reason on /FLASH and /SD0/rpc
+-- memory reason on /FLASH and /SD0/lua
 --
 local compilelua = "compile.lua"
 if file.exists(compilelua) then
