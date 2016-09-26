@@ -38,3 +38,10 @@ The SD must have at least two folders in the root directory:
  - "html" for all static resources like html/js/css or images
  - "lua" for all dynamic HTML files ( e.g. for ajax endpoints)
 
+
+## Example web projects
+### Blank
+A blank example with one HTML page and a LUA dynamic page. This project is a good starting point
+if you host just some HTML pages without jQuery and a little bit of CSS styling.
+ 
+Github Repo: [blank](https://github.com/freegroup/nodemcu-wampum-example)
