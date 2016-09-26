@@ -11,6 +11,10 @@ getting started.
 
 Just load your pages on the SD card and your are done.
 
+
+![WebServer](/teaser.png?raw=true "ESP8266 as full web server")
+
+
 Requirements:
 -------------
 You must connect an SD card to your nodeMCU or you are using
