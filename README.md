@@ -3,13 +3,12 @@
 
 A simple HTTP web server hosting static and dynamic lua script files
 from SD card instead of the flash ram.
-This server is very limited and you must code your pages carefully
-Go to the GITHUB repository and clone an example HTML project as
-getting started.
+This server is very limited and you must code your pages carefully. You can use some of the example
+web projects listed on the bottom of the page.
 
 *THERE IS NO NEED TO MODIFY THIS PROJECT TO SERVE YOUR PROJECT/WEBSITE*
 
-Just load your pages on the SD card and your are done.
+Just load your project on the SD card and your are done.
 
 
 ![WebServer](/teaser.png?raw=true "ESP8266 as full web server")
