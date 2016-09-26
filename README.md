@@ -1,12 +1,11 @@
 # nodemcu-wampum
 **A ESP8266 web server delivering static/dyn pages from SD card**
 
-A simple HTTP web server hosting static and dynamic lua script files
-from SD card instead of the flash ram.
-This server is very limited and you must code your pages carefully. You can use some of the example
-web projects listed on the bottom of the page.
+A simple HTTP web server hosting HTML,JS,CSS and server side lua script files
+**from SD** card instead of the flash ram.
 
-*THERE IS NO NEED TO MODIFY THIS PROJECT TO SERVE YOUR PROJECT/WEBSITE*
+This server is very limited in resources and you must code your pages carefully. Best you clone 
+some of the example web projects listed on the bottom of the page.
 
 Just load your project on the SD card and your are done.
 
@@ -37,12 +36,17 @@ NodeMCU custom build by frightanic.com
 ```
 
 
-The SD must have at least two folders in the root directory:
+## Web projects
+The server delivers the content from the SD card and not from the internal FLASH RAM. This is a little bit 
+slower - but you can easily update your WebSite just by update the SD card instead of flash the ESP.
+
+
+## Configuration by convention
+The SD card must have at least two folders in the root directory:
  - "html" for all static resources like html/js/css or images
- - "lua" for all dynamic HTML files ( e.g. for ajax endpoints)
+ - "lua" for all server side scripts ( e.g. for ajax endpoints)
 
-
-## Example web projects
+## Demo Projects
 
 ### Blank
 A blank example with one HTML page and a LUA dynamic page. This project is a good starting point
