@@ -44,8 +44,15 @@ The SD must have at least two folders in the root directory:
 
 
 ## Example web projects
+
 ### Blank
 A blank example with one HTML page and a LUA dynamic page. This project is a good starting point
 if you host just some HTML pages without jQuery and a little bit of CSS styling.
  
-Github Repo: [blank](https://github.com/freegroup/nodemcu-wampum-example)
+Github Repo: [nodemcu-wampum-example](https://github.com/freegroup/nodemcu-wampum-example)
+
+### simple jQuery UI with Ajax backend
+This projects is based on the jquery lib and toggles the WeMos LED on/off with a AJAX calls. **no page refresh**
+All the files are located on the ESP8266 and the connected SD-shield.
+
+Github Repo: [nodemcu-wampum-jquery](https://github.com/freegroup/nodemcu-wampum-jquery)
