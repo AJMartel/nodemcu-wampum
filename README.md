@@ -12,9 +12,15 @@ Just load your project on the SD card and your are done.
 
 ![WebServer](/teaser.png?raw=true "ESP8266 as full web server")
 
+## Features
+ - GET, POST, PUT and minor changes to support other methods
+ - Multiple MIME types
+ - Error pages (404 and others)
+ - Server-side execution of Lua scripts
+ - Query string argument parsing with decoding of arguments
+ - Serving .gz compressed files
 
-Requirements:
--------------
+## Requirements
 You must connect an SD card to your nodeMCU or you are using
 [WeMos](http://www.wemos.cc) (nodeMCU protoboard) + [SD Card shield](http://www.wemos.cc/product/micro-sd-card-shield.html) (hassle-free version).
 
