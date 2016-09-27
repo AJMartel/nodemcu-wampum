@@ -12,6 +12,12 @@ Just load your project on the SD card and your are done.
 
 ![WebServer](/teaser.png?raw=true "ESP8266 as full web server")
 
+## Yet another NodeMCU WebServer?
+You find a lot of examples how to setup the NodeMCU as simple WebServer
+serving a simple and ugly web page turning a LED on/off. But this far
+from the reality and it is almost impossible to build a fancy UI for your
+IoT project.
+
 ## Features
  - GET, POST, PUT and minor changes to support other methods
  - Multiple MIME types
@@ -42,6 +48,25 @@ NodeMCU custom build by frightanic.com
 ```
 
 ![BuildSettings](/nodeMCU_build.png?raw=true "build settings")
+
+## How to upload the code
+I recommend using the ESPlorer program created by 4refr0nt to create and save LUA files into your ESP8266.
+Follow these instructions to download and install ESPlorer:
+ - [Click here to download ESPlorer](Click here to download ESPlorer)
+ - Unzip that folder
+ - Run ESPlorer.jar. It’s a JAVA program, so you need JAVA installed on your computer.
+ - Open the ESPlorer
+
+![ESPlorer](/esplorer.png?raw=true)
+ - Connect your NodeMCU to your computer
+ - Select your NodeMCU port
+ - Press **Open/Close** button
+ - Press **Upload** button
+ - Select all files from the *nodemcu-wampum* and upload them to the NodeMCU
+ - reboot your NodeMCU
+ 
+![upload](/upload.png?raw=true)
+
 
 
 ## Web projects
