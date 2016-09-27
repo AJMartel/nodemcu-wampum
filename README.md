@@ -62,7 +62,7 @@ if you host just some HTML pages without jQuery and a little bit of CSS styling.
  
 Github Repo: [nodemcu-wampum-example](https://github.com/freegroup/nodemcu-wampum-example)
 
-### simple jQuery UI with Ajax backend
+### jQuery UI with Ajax backend
 This projects is based on the jquery lib and toggles the WeMos LED on/off with a AJAX calls. **no page refresh**
 All the files are located on the ESP8266 and the connected SD-shield.
 
