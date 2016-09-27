@@ -22,25 +22,29 @@ return function (connection, payload)
                 serveFunction = dofile("httpserver-error.lc")
             end
         else
-            local fileExists = file.exists("/SD0/html/"..uri.file)
-            if not fileExists then
-                fileExists = file.exists("/SD0/html/"..uri.file .. ".gz")
+            -- maybe the file is for performance resons on the internal /FLASH RAM
+            --
+            local fileExists = file.exists("/SD0/html/"..uri.file..".gz")
+            if fileExists then
+                uri.file = "/SD0/html/"..uri.file..".gz";
+                uri.isGzipped = true
+            else
+                fileExists = file.exists("/SD0/html/"..uri.file)
                 if fileExists then
-                    uri.file = uri.file .. ".gz"
-                    uri.isGzipped = true
+                    uri.file = "/SD0/html/"..uri.file
                 end
             end
+
             collectgarbage()
             print("File '"..uri.file.."' exists :"..tostring(fileExists));
 
-            if not fileExists then
-                uri.args = {code = 404, errorString = "Not Found"}
-                serveFunction = dofile("httpserver-error.lc")
+            if fileExists then
+                uri.args = {file = uri.file, code = 200, ext = uri.ext, gzipped = uri.isGzipped}
+                serveFunction = dofile("httpserver-static.lc")
             else
-                uri.args = {file = uri.file, ext = uri.ext, gzipped = uri.isGzipped}
+                uri.args = {file = "404.html", code = 404, ext = "html"}
                 serveFunction = dofile("httpserver-static.lc")
             end
-
         end
     else
         serveFunction = dofile("httpserver-error.lc")

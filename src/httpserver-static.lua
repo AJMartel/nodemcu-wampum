@@ -2,7 +2,7 @@
 -- Handles sending static files to client.
 
 return function (connection, req, args)
-   dofile("httpserver-header.lc")(connection, 200, args.ext, args.gzipped)
+   dofile("httpserver-header.lc")(connection, args.code, args.ext, args.gzipped)
    -- Send file in little chunks
    local continue = true
    local bytesSent = 0
@@ -11,7 +11,7 @@ return function (connection, req, args)
       -- NodeMCU file API lets you open 1 file at a time.
       -- So we need to open, seek, close each time in order
       -- to support multiple simultaneous clients.
-      file.open("/SD0/html/"..args.file)
+      file.open(args.file)
       file.seek("set", bytesSent)
       local chunk = file.read(1024)
       file.close()

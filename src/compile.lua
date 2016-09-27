@@ -2,31 +2,32 @@
 -- This only happens the first time afer the .lua files are uploaded.
 
 return function(filename)
-    local function compileAndRemoveIfNeeded(f)
+    local function compileAndRemoveIfNeeded(f, removeLua)
         if file.exists(f) then
             print('Compiling:', f)
             tmr.wdclr()
             node.compile(f)
-            file.remove(f)
-            print("done")
+            if removeLua then
+                file.remove(f)
+            end
             collectgarbage()
         end
     end
 
     if filename then
-        compileAndRemoveIfNeeded(filename)
+        compileAndRemoveIfNeeded(filename, true)
     else
         local allFiles = file.list()
         for f,s in pairs(allFiles) do 
             if f~="init.lua" and #f >= 4 and string.sub(f, -4, -1) == ".lua" then
-                compileAndRemoveIfNeeded(f) 
+                compileAndRemoveIfNeeded(f, true)
             end
         end
         file.chdir("/SD0/lua")
         allFiles = file.list()
         for f,s in pairs(allFiles) do
             if f~="init.lua" and #f >= 4 and string.sub(f, -4, -1) == ".lua" then
-                compileAndRemoveIfNeeded(f)
+                compileAndRemoveIfNeeded(f, false)
             end
         end
         file.chdir("/FLASH")
