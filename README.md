@@ -41,6 +41,8 @@ NodeMCU custom build by frightanic.com
 
 ```
 
+![BuildSettings](/nodeMCU_build.png?raw=true "build settings")
+
 
 ## Web projects
 The server delivers the content from the SD card and not from the internal FLASH RAM. This is a little bit 
