@@ -64,7 +64,7 @@ Follow these instructions to download and install ESPlorer:
  - Press **Upload** button
  - Select all files from the *nodemcu-wampum* and upload them to the NodeMCU
  - reboot your NodeMCU
- 
+
 ![upload](/upload.png?raw=true)
 
 
@@ -78,6 +78,13 @@ slower - but you can easily update your WebSite just by update the SD card inste
 The SD card must have at least two folders in the root directory:
  - "html" for all static resources like html/js/css or images
  - "lua" for all server side scripts ( e.g. for ajax endpoints)
+
+## Connect the client
+After you have upload one demo project to your SD card you can connect to the NodeMCU with a browser.
+
+ - select the WiFi network with the name **wampum-xxxxxx**
+ - Enter **theballismine** as network password
+ - Open browser and connect to http://192.168.111.1/
 
 ## Demo Projects
 
